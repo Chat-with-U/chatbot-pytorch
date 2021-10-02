@@ -56,10 +56,34 @@ Seq2Seq은 크게 Encoder와 Decoder로 이루어져 있다.
   
 
 ## Requirements
-- PyTorch
+- PyTorch 
+- CUDA 10.2
 - Python 3.7
 - Numpy
--
+- Pandas
+- KoNLPy
+  >#### KoNLPy 설치
+  > 데이터 전처리 과정에서 문장을 토큰으로 나눠야하는데, 한국어의 경우 KoNLPy를 활용하여 형태소분석을 한다.
+  > KoNLPy를 통해 Hannanum, Kkma, Komoran, Mecab, Okt(Twitter) 등의 라이브러리를 활용할 수 있다.
+  > 
+  > 
+  > **<Windows>**
+  > 1.자바 설치(버전 1.7 이상)<br>
+  > cmd창에서 버전 확인 `java -version`
+  > 
+  > 2.JPype1 설치 <br>
+  >  파이썬에서 자바를 호출할 수 있는 라이브러리 `pip install jpype1`
+  > 
+  > 3.KoNLPy 설치 <br>
+  > `pip install konlpy`<br>
+  > AttributeError: module 'tweepy' has no attribute 'StreamListener' 오류로 [직접 설치](https://github.com/konlpy/konlpy) 해야함.
+  > 
+  > 참고<br>
+  > https://konlpy.org/ko/v0.4.3/install/#id2 <br>
+  > https://ericnjennifer.github.io/python_visualization/2018/01/21/PythonVisualization_Chapt1.html
 
-
+  > ### Mecab 설치 
+  > https://hong-yp-ml-records.tistory.com/91
+  
 ## Reference
+https://tutorials.pytorch.kr/beginner/chatbot_tutorial.html 를 참고하여 작성.
