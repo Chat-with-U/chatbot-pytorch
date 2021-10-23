@@ -14,11 +14,6 @@ Open Domain 챗봇 구현을 위한 스터디 내용 기록 저장소
 
 Seq2Seq은 크게 Encoder와 Decoder로 이루어져 있다.
 
-
-#### 특징
-#### 장점
-#### 단점
-
 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215)
 
 
