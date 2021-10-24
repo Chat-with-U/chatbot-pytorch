@@ -1,5 +1,5 @@
 # 💡 Chatbot Pytorch
-Open Domain 챗봇 구현을 위한 스터디 내용 기록 저장소
+Pytorch 버전 Open Domain 챗봇 구현 기록 저장소
 
 - NLP를 공부하고자 하는 사람들을 위한 자료 제공
 - 데이터 수집, 전처리, 학습, 제공까지 전반적인 과정을 기록
