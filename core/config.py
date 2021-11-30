@@ -1,1 +1,1 @@
-data_path = '../data/' # ~/chatbot-study/data
+data_path = '../dataset/' # ~/chatbot-study/data
