@@ -25,22 +25,7 @@ class Trainer(object):
         self.model = Transformer(vocab_size, 1, 6, 512, 768)
         self.handler = handler
 
-
     def train(self):
-        # total_utterances, question, answer = make_utterances(self.data_path)
-        # pos_tagger = Mecab()  # konlpy의 대표적인 형태소 분석기 mecab
-        #
-        # vocab = make_vocab(total_utterances, pos_tagger)
-        #
-        # self.token2index = {token: index for index, token in enumerate(vocab)}
-        # self.index2token = {index: token for index, token in enumerate(vocab)}
-        #
-        # self.handler = WordHandler(vocab, pos_tagger, self.token2index, self.index2toke)
-        #
-        # input_ids = question.map(self.handler.encode)
-        # output_ids = answer.map(self.handler.encode)
-        #
-        # chitchat_data = ChitChatDataset(input_ids, output_ids, self.index2toke, self.token2index, 60)
         chichat_dataloader = DataLoader(self.dataset, batch_size=self.batch_size, shuffle=True)
         criterion = nn.CrossEntropyLoss()
         optimizer = Adam(self.model.parameters(), self.lr)
@@ -92,7 +77,6 @@ class Trainer(object):
             sample_output = self.handler.decode_without_tag(logit[0].argmax(-1)[logit[0].argmax(-1) != 0].tolist())
 
         print(sample_output)
-
 
     def make_sentence2input(self, sentence):
         input_ids = self.handler.encode(sentence)
