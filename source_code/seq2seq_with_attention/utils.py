@@ -1,7 +1,7 @@
 import pandas as pd
 
 def make_utterances(data_path):
-    chatbot_data = pd.read_csv(f'../../dataset/ChatbotData.csv')
+    chatbot_data = pd.read_csv(data_path)
     question = chatbot_data.Q  # Seq2Seq에 encoder_input
     answer = chatbot_data.A  # Seq2Seq에 decoder_input
     total_utterances = pd.concat((question, answer))  # vocab을 만들기위한 전체 발화문장

@@ -1,7 +1,7 @@
 from model import Seq2Seq
 from data import WordHandler, ChitChatDataset
-from mxnet.optimizer import Adam
-from utils import make_total_utterances, make_vocab
+from torch.optim import Adam
+from utils import make_utterances, make_vocab
 from konlpy.tag import Mecab
 
 from torch.utils.data import DataLoader
@@ -12,8 +12,9 @@ from tqdm import tqdm
 
 
 class Trainer(object):
-    def __init__(self, data_path, batch_size, lr, epoch, device, vocab_size, max_seq_len, use_attention=True):
-        self.data_path = data_path
+    def __init__(self, dataset, batch_size, lr, epoch, device, vocab_size,
+                 max_seq_len, handler, use_attention=True):
+        self.dataset = dataset
         self.batch_size = batch_size
         self.lr = lr
         self.epoch = epoch
@@ -21,24 +22,11 @@ class Trainer(object):
         self.vocab_size = vocab_size
         self.max_seq_len = max_seq_len
         self.use_attention = use_attention
+        self.handler = handler
         self.model = Seq2Seq(self.vocab_size, 512, use_attention)
 
     def train(self):
-        total_utterances, question, answer = make_total_utterances(self.data_path)
-        pos_tagger = Mecab()  # konlpy의 대표적인 형태소 분석기 mecab
-
-        vocab = make_vocab(total_utterances, pos_tagger)
-
-        self.token2index = {token: index for index, token in enumerate(vocab)}
-        self.index2token = {index: token for index, token in enumerate(vocab)}
-
-        self.handler = WordHandler(vocab, pos_tagger, self.token2index, self.index2toke)
-
-        input_ids = question.map(self.handler.encode)
-        output_ids = answer.map(self.handler.encode)
-
-        chitchat_data = ChitChatDataset(input_ids, output_ids, self.index2toke, self.token2index, 60)
-        chichat_dataloader = DataLoader(chitchat_data, batch_size=self.batch_size, shuffle=True)
+        chichat_dataloader = DataLoader(self.dataset, batch_size=self.batch_size, shuffle=True)
         criterion = nn.CrossEntropyLoss()
         optimizer = Adam(self.model.parameters(), self.lr)
 
