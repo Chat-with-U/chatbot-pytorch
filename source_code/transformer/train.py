@@ -1,8 +1,6 @@
 from models import Transformer
-from data import WordHandler, ChitChatDataset
-from torch.optim import Adam
-from utils import make_utterances, make_vocab
-from konlpy.tag import Mecab
+from transformers import AdamW
+
 
 from torch.utils.data import DataLoader
 from torch import nn
@@ -28,7 +26,7 @@ class Trainer(object):
     def train(self):
         chichat_dataloader = DataLoader(self.dataset, batch_size=self.batch_size, shuffle=True)
         criterion = nn.CrossEntropyLoss()
-        optimizer = Adam(self.model.parameters(), self.lr)
+        optimizer = AdamW(self.model.parameters(), self.lr)
         model = self.model.to(self.device)
 
         step = 0
